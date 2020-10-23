@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using MemLeakObservableSample.ViewModels;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MemLeakObservableSample.Views
@@ -8,21 +10,31 @@ namespace MemLeakObservableSample.Views
         public MainPage() =>
             InitializeComponent();
 
-        private async void Button_Clicked(object sender, System.EventArgs e)
+        private void Button_Clicked(object sender, System.EventArgs e)
         {
-            for (int index = 0; index < 5000; index++)
+            Task.Factory.StartNew(async () =>
             {
-                var name = $"test-{index}";
+                for (int index = 0; index < 5000; index++)
+                {
+                    var name = $"test-{index}";
 
-                App.Current.OnAddItem(name);
-                listView.ScrollTo(name, ScrollToPosition.End, true);
-                await Task.Delay(20);
-            }
+                    App.Current.OnAddItem(this, name);
+                    listView.ScrollTo(name, ScrollToPosition.End, true);
+                    await Task.Delay(20);
+                }
+            }, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         }
 
         private void Modal_Clicked(object sender, System.EventArgs e)
         {
             Navigation.PushModalAsync(new ModalPage(), true);
         }
+
+        private void ObservableCollectionStrategy_Clicked(object sender, System.EventArgs e) =>
+            BindingContext = new MainViewModel();
+
+        void ConcurrentStackStrategy_Clicked(object sender, System.EventArgs e) =>
+            BindingContext = new ConcurrentMainViewModel();
+
     }
 }

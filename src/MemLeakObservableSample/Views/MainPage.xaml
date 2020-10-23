@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MemLeakObservableSample.ViewModels"
-             Title="Memory Leak Sample"
+             Title="{Binding Title}"
              x:Class="MemLeakObservableSample.Views.MainPage">
 
     <ContentPage.BindingContext>
@@ -12,12 +12,15 @@
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <StackLayout>
-                <Label Text="Observable Collection memory leak tester" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Start" Clicked="Button_Clicked" />
-                    <Button Text="Clear" Command="{Binding Clear}" HorizontalOptions="EndAndExpand" />
+                <StackLayout>
+                    <Label Text="Observable Collection memory leak tester" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Start" Clicked="Button_Clicked" />
+                        <Button Text="Clear" Command="{Binding Clear}" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                    <Button Text="Open Modal Page" Clicked="Modal_Clicked" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
-                <Button Text="Open Modal Page" Clicked="Modal_Clicked" HorizontalOptions="CenterAndExpand" />
+                <Label Text="{Binding Count}" HorizontalOptions="CenterAndExpand" FontSize="18" />
             </StackLayout>
         </Frame>
         <ListView x:Name="listView" 
@@ -32,7 +35,11 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>   
+        </ListView>
+        <StackLayout>
+            <Button Text="Memory Leak Strategy" Clicked="ObservableCollectionStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
+            <Button Text="Non-Memory Leak Strategy" Clicked="ConcurrentStackStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

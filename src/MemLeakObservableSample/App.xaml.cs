@@ -29,9 +29,9 @@ namespace MemLeakObservableSample
         {
         }
 
-        public void OnAddItem(string name)
+        public void OnAddItem(object sender, string name)
         {
-            AddItem?.Invoke(this, new AddItemEventArgs { Name = name });
+            AddItem?.Invoke(sender, new AddItemEventArgs { Name = name });
         }
     }
 

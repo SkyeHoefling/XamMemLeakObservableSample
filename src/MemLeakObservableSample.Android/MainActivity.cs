@@ -26,14 +26,5 @@ namespace MemLeakObservableSample.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-        [Export("MemoryTest")]
-        public void MemoryTest()
-        {
-            for (int index = 0; index < 100; index++)
-            {
-                App.Current.OnAddItem($"test-{index}");
-            }
-        }
     }
 }
