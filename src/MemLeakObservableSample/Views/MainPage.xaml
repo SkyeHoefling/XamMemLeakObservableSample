@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MemLeakObservableSample.ViewModels"
+             Title="Memory Leak Sample"
+             x:Class="MemLeakObservableSample.Views.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <StackLayout>
+                <Label Text="Observable Collection memory leak tester" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Start" Clicked="Button_Clicked" />
+                    <Button Text="Clear" Command="{Binding Clear}" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <Button Text="Open Modal Page" Clicked="Modal_Clicked" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Frame>
+        <ListView x:Name="listView" 
+                    ItemsSource="{Binding Items}"
+                    CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label Text="{Binding .}" />
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>   
+    </StackLayout>
+
+</ContentPage>
