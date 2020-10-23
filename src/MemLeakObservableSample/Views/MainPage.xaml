@@ -39,6 +39,7 @@
         <StackLayout>
             <Button Text="Memory Leak Strategy" Clicked="ObservableCollectionStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
             <Button Text="Non-Memory Leak Strategy" Clicked="ConcurrentStackStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
+            <Button Text="DynamicData Strategy" Clicked="DynamicDataStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </StackLayout>
 

@@ -36,5 +36,8 @@ namespace MemLeakObservableSample.Views
         void ConcurrentStackStrategy_Clicked(object sender, System.EventArgs e) =>
             BindingContext = new ConcurrentMainViewModel();
 
+        void DynamicDataStrategy_Clicked(object sender, System.EventArgs e) =>
+            BindingContext = new DynamicDataMainViewModel();
+
     }
 }
