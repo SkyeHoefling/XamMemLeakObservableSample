@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace MemLeakObservableSample.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MainViewModel
     {
         public MainViewModel()
         {
@@ -23,15 +23,11 @@ namespace MemLeakObservableSample.ViewModels
         void OnAddItem(object sender, AddItemEventArgs eventArgs)
         {
             Items.Add(eventArgs.Name);
-            RaisePropertyChanged(nameof(Count));
-            RaisePropertyChanged(nameof(Items));
         }
 
         void OnClear()
         {
             Items.Clear();
-            RaisePropertyChanged(nameof(Count));
-            RaisePropertyChanged(nameof(Items));
         }
     }
 }

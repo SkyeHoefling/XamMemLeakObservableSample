@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MemLeakObservableSample.ViewModels"
              Title="{Binding Title}"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="MemLeakObservableSample.Views.MainPage">
 
     <ContentPage.BindingContext>
@@ -20,10 +21,24 @@
                     </StackLayout>
                     <Button Text="Open Modal Page" Clicked="Modal_Clicked" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
-                <Label Text="{Binding Count}" HorizontalOptions="CenterAndExpand" FontSize="18" />
+                <Label Text="{Binding Items.Count}" HorizontalOptions="CenterAndExpand" FontSize="18" />
             </StackLayout>
         </Frame>
-        <ListView x:Name="listView" 
+        <syncfusion:SfListView x:Name="sfListView"
+                               ItemsSource="{Binding Items}">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding .}"/>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+                               
+        
+        <!-- If you are swapping between the ListView and CollectionView you will need
+             to uncomment/comment the correct lines below. You will also need to do the
+             same in the code behind as the scroll action needs to be triggered -->
+        
+        <!--<ListView x:Name="listView" 
                     ItemsSource="{Binding Items}"
                     CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
@@ -35,12 +50,16 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout>
-            <Button Text="Memory Leak Strategy" Clicked="ObservableCollectionStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
-            <Button Text="Non-Memory Leak Strategy" Clicked="ConcurrentStackStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
-            <Button Text="DynamicData Strategy" Clicked="DynamicDataStrategy_Clicked" HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        </ListView>-->
+        <!--<CollectionView x:Name="collectionView"
+                        ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+                        
     </StackLayout>
 
 </ContentPage>
